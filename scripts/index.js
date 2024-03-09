@@ -25,7 +25,9 @@ function viewTransactions() {
 }
 
 createTransactionForm.addEventListener('submit', function(event) {
+  event.preventDefault();
   const description = document.getElementById('description').value;
   const amount = parseFloat(document.getElementById('amount').value);
   createTransaction(description, amount);
+  createTransactionForm.reset();
 });
