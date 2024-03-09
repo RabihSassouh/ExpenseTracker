@@ -10,6 +10,7 @@ function viewTransactions() {
     transactionItem.innerHTML = `
         <div>${transaction.description}</div>
         <div>${transaction.amount}</div>
+        <div>${transaction.transactionType}</div>
         <button onclick="editTransaction(${index})">Edit</button>
         <button onclick="deleteTransaction(${index})">Delete</button>
       `;
@@ -17,8 +18,8 @@ function viewTransactions() {
   });
 }
 
-function createTransaction(description, amount) {
-  const newTransaction = { description, amount };
+function createTransaction(description, amount,transactionType) {
+  const newTransaction = { description, amount,transactionType };
   transactions.push(newTransaction);
   // console.log("test");
   viewTransactions();
@@ -41,6 +42,7 @@ createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const description = document.getElementById("description").value;
   const amount = parseFloat(document.getElementById("amount").value);
-  createTransaction(description, amount);
+  const transactionType=document.getElementById("transactionType").value;
+  createTransaction(description, amount,transactionType);
   createTransactionForm.reset();
 });
