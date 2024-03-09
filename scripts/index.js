@@ -24,6 +24,11 @@ function viewTransactions() {
   });
 }
 
+function deleteTransaction(index){
+    transactions.splice(index,1);
+    viewTransactions();
+}
+
 createTransactionForm.addEventListener('submit', function(event) {
   event.preventDefault();
   const description = document.getElementById('description').value;
