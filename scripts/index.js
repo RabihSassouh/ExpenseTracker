@@ -64,7 +64,7 @@ function applyFilter() {
 
   filteredTransactions.forEach((filteredTransaction, index) => {
     transactionItemJson = document.createElement("div");
-  
+
     transactionItemJson.innerHTML = `  <div>${filteredTransaction.description}</div>
       <div>${filteredTransaction.amount}</div>
       <div>${filteredTransaction.transactionType}</div>
@@ -72,7 +72,7 @@ function applyFilter() {
       <button onclick="editTransaction(${index})">Edit</button>
       <button onclick="deleteTransaction(${index})">Delete</button>
     `;
-  
+
     transactionsContainer.appendChild(transactionItemJson);
   });
 }
@@ -89,34 +89,59 @@ function getFromLocalStorage() {
     return [];
   }
 }
-function fetchCurrencies(){
-  fetch("https://crowded-cyan-wildebeest.cyclic.app/students/available",
-{
-  method:"GET",
-})
-.then(Response=>{
-  return Response.json();
-})
-.then(data =>{
-  const selectCurrency=document.getElementById("currency");
-  selectCurrency.innerHTML="";
-  data.forEach(currency=>{
-  const option=document.createElement("option");
-  option.value=currency.code;
-  option.textContent=currency.code;
-  selectCurrency.appendChild(option);
+
+function fetchCurrencies() {
+  fetch("https://crowded-cyan-wildebeest.cyclic.app/students/available", {
+    method: "GET",
   })
-})
+    .then((Response) => {
+      return Response.json();
+    })
+    .then((data) => {
+      const selectCurrency = document.getElementById("currency");
+      selectCurrency.innerHTML = "";
+
+      data.forEach((currency) => {
+        const option = document.createElement("option");
+        option.value = currency.code;
+        option.textContent = currency.code;
+
+        selectCurrency.appendChild(option);
+      });
+    });
 }
+
+function convertCurrency(fromCurrency, toCurrency, amount) {
+  const data = {
+    from: fromCurrency,
+    to: toCurrency,
+    amount: amount,
+  };
+  
+  fetch("https://crowded-cyan-wildebeest.cyclic.app/students/convert", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    });
+}
+convertCurrency("USD", "EUR", 100);
 
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  
+
   const description = document.getElementById("description").value;
   const amount = parseFloat(document.getElementById("amount").value);
   const transactionType = document.getElementById("transactionType").value;
   const currency = document.getElementById("currency").value;
-  
+
   createTransaction(description, amount, transactionType, currency);
   createTransactionForm.reset();
 });
