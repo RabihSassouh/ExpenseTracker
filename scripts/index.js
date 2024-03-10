@@ -98,9 +98,14 @@ function fetchCurrencies(){
   return Response.json();
 })
 .then(data =>{
-  for(let i=0;i<data.length;i++){
-  console.log(data[i].code);
-  }
+  const selectCurrency=document.getElementById("currency");
+  selectCurrency.innerHTML="";
+  data.forEach(currency=>{
+  const option=document.createElement("option");
+  option.value=currency.code;
+  option.textContent=currency.code;
+  selectCurrency.appendChild(option);
+  })
 })
 }
 
