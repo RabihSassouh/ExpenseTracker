@@ -2,6 +2,7 @@ let transactions = [];
 const transactionsContainer = document.getElementById("transactions-container");
 const createTransactionForm = document.getElementById("add-transaction-form");
 const applyFilters = document.getElementById("applyFilter");
+const convertCurrencyForm=document.getElementById("convert-form");
 
 function viewTransactions() {
   transactionsContainer.innerHTML = "";
@@ -145,7 +146,7 @@ function convertCurrency(fromCurrency, toCurrency, amount) {
       console.log(data);
     });
 }
-convertCurrency("USD", "LBP", 100);
+
 
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -164,3 +165,9 @@ applyFilters.addEventListener("click", function () {
 });
 
 fetchCurrencies();
+
+convertCurrencyForm.addEventListener("submit",function(event){
+  event.preventDefault();
+  // convertCurrency(currencyFrom,currencyTo,amountToConvert.value);
+convertCurrency("USD", "LBP", 100);
+})
