@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/commons/utilities.css">
+    <link rel="stylesheet" href="../styles/commons/colors.css">
+    <link rel="stylesheet" href="../styles/loginSignup.css">
+    <title>LogIn Page</title>
+</head>
+<body>
+    <div class="container" id="loginContainer">
+        <div class="box white-bg flex column">
+            <h1 class="bold">LOGIN</h1>
+            <p class="wrongInput hide" id="wrongInput">Incorrect username or password</p>
+            <p class="wrongInput hide" id="emptyInput">Enter both username and password</p>
+            <input type="text" class="username-btn" id="username" placeholder="username" />
+            <input type="password" class="password-btn" id="password" placeholder="password" />
+            <label class="remember-me">
+                <input type="checkbox" id="rememberMe"/>Remember me
+            </label>
+            <button class="login-btn white-text bold primary-bg" id="login">Log in</button>
+            <a class="forgot-password" href="#">Forgot password?</a>
+        </div>
+    </div>
+    </body>
+</html>

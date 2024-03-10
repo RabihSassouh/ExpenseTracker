@@ -92,7 +92,7 @@ function getFromLocalStorage() {
 }
 
 function fetchCurrencies() {
-  fetch("https://crowded-cyan-wildebeest.cyclic.app/students/available", {
+  fetch("https://rich-erin-angler-hem.cyclic.app/students/available", {
     method: "GET",
   })
     .then((Response) => {
@@ -132,7 +132,7 @@ function convertCurrency(fromCurrency, toCurrency, amount) {
     amount: amount,
   };
   
-  fetch("https://crowded-cyan-wildebeest.cyclic.app/students/convert", {
+  fetch("https://rich-erin-angler-hem.cyclic.app/students/convert", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -146,8 +146,6 @@ function convertCurrency(fromCurrency, toCurrency, amount) {
       console.log(data);
     });
 }
-
-
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
