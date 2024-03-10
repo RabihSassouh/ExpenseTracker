@@ -23,9 +23,8 @@ function viewTransactions() {
 function createTransaction(description, amount, transactionType, currency) {
   const newTransaction = { description, amount, transactionType, currency };
   transactions.push(newTransaction);
-  // console.log("test");
   viewTransactions();
-    saveToLocalStorage(transactions);
+  saveToLocalStorage(transactions);
 }
 
 function deleteTransaction(index) {
@@ -39,6 +38,7 @@ function editTransaction(index) {
   const newAmount = parseFloat(prompt("enter new amount:"));
   transactions[index].description = newDescription;
   transactions[index].amount = newAmount;
+  saveToLocalStorage(transactions);
   viewTransactions();
 }
 
@@ -57,11 +57,14 @@ function applyFilter() {
       (filterCurrency === "all" || transaction.currency === filterCurrency)
     );
   });
+
   filteredTransactionsJson = JSON.stringify(filteredTransactions);
   console.log(filteredTransactionsJson);
   transactionsContainer.innerHTML = "";
+
   filteredTransactions.forEach((filteredTransaction, index) => {
     transactionItemJson = document.createElement("div");
+  
     transactionItemJson.innerHTML = `  <div>${filteredTransaction.description}</div>
       <div>${filteredTransaction.amount}</div>
       <div>${filteredTransaction.transactionType}</div>
@@ -69,30 +72,32 @@ function applyFilter() {
       <button onclick="editTransaction(${index})">Edit</button>
       <button onclick="deleteTransaction(${index})">Delete</button>
     `;
+  
     transactionsContainer.appendChild(transactionItemJson);
   });
 }
 
 function saveToLocalStorage(transactions) {
-    localStorage.setItem('transactions', JSON.stringify(transactions));
+  localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
 function getFromLocalStorage() {
-    const transactionsJson = localStorage.getItem('transactions');
-    if (transactionsJson){
-       return JSON.parse(transactionsJson)
-    } 
-    else {
-        return[];
-    }
+  const transactionsJson = localStorage.getItem("transactions");
+  if (transactionsJson) {
+    return JSON.parse(transactionsJson);
+  } else {
+    return [];
+  }
 }
 
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
+  
   const description = document.getElementById("description").value;
   const amount = parseFloat(document.getElementById("amount").value);
   const transactionType = document.getElementById("transactionType").value;
   const currency = document.getElementById("currency").value;
+  
   createTransaction(description, amount, transactionType, currency);
   createTransactionForm.reset();
 });
