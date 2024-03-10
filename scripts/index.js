@@ -89,6 +89,20 @@ function getFromLocalStorage() {
     return [];
   }
 }
+function fetchCurrencies(){
+  fetch("https://crowded-cyan-wildebeest.cyclic.app/students/available",
+{
+  method:"GET",
+})
+.then(Response=>{
+  return Response.json();
+})
+.then(data =>{
+  for(let i=0;i<data.length;i++){
+  console.log(data[i].code);
+  }
+})
+}
 
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -105,3 +119,5 @@ createTransactionForm.addEventListener("submit", function (event) {
 applyFilters.addEventListener("click", function () {
   applyFilter();
 });
+
+fetchCurrencies();
