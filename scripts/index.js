@@ -1,6 +1,7 @@
 let transactions = [];
 const transactionsContainer = document.getElementById("transactions-container");
 const createTransactionForm = document.getElementById("add-transaction-form");
+const applyFilters=document.getElementById("applyFilter");
 
 function viewTransactions() {
   transactionsContainer.innerHTML = "";
@@ -39,6 +40,26 @@ function editTransaction(index) {
   viewTransactions();
 }
 
+function applyFilter(){
+    const filterByType=document.getElementById("filterByType").value;
+    const amountFrom=parseFloat(document.getElementById("amountFrom").value);
+    const amountTo=parseFloat(document.getElementById("amountTo").value);
+    const filterCurrency=document.getElementById("filterCurrency").value;
+
+    const filteredTransactions= transactions.filter(transaction =>{
+        for (let i=0;i<transactions.length;i++){
+        return (transaction.transactionType===filterByType) && (transaction.amount>amountFrom)
+        && (transaction.amount<amountTo) && (transaction.currency===filterCurrency);
+        }
+    })
+    console.log(filterByType);
+    console.log(amountFrom);
+    console.log(amountTo);
+    console.log(filterCurrency);
+    console.log(filteredTransactions);
+    viewTransactions(filteredTransactions);
+}
+
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const description = document.getElementById("description").value;
@@ -48,3 +69,7 @@ createTransactionForm.addEventListener("submit", function (event) {
   createTransaction(description, amount,transactionType,currency);
   createTransactionForm.reset();
 });
+
+applyFilters.addEventListener("click",function(){
+    applyFilter();
+})

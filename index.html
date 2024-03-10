@@ -24,7 +24,25 @@
         </select>
         <button type="submit">Add Transaction</button>
     </form>
-
+    <div id="filters">
+        <div>Filters</div>
+        <select id="filterByType">
+            <option value="all">All</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+        <div>Amount from:</div>
+        <input type="number" id="amountFrom" placeholder="0">
+        <div>Amount to:</div>
+        <input type="number" id="amountTo" placeholder="999999999">
+        <div>Filter by currency</div>
+        <select id="filterCurrency">
+            <option value="all">All</option>
+            <option value="LBP">LBP</option>
+            <option value="USD">USD</option>
+        </select>
+        <button id="applyFilter">Apply Filter</button>
+    </div>
 <!-- Container to view transactions -->
     <div id="transactions-container"></div>
 
