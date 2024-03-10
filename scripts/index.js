@@ -25,10 +25,12 @@ function createTransaction(description, amount, transactionType, currency) {
   transactions.push(newTransaction);
   // console.log("test");
   viewTransactions();
+    saveToLocalStorage(transactions);
 }
 
 function deleteTransaction(index) {
   transactions.splice(index, 1);
+  saveToLocalStorage(transactions);
   viewTransactions();
 }
 
@@ -69,6 +71,20 @@ function applyFilter() {
     `;
     transactionsContainer.appendChild(transactionItemJson);
   });
+}
+
+function saveToLocalStorage(transactions) {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+}
+
+function getFromLocalStorage() {
+    const transactionsJson = localStorage.getItem('transactions');
+    if (transactionsJson){
+       return JSON.parse(transactionsJson)
+    } 
+    else {
+        return[];
+    }
 }
 
 createTransactionForm.addEventListener("submit", function (event) {
