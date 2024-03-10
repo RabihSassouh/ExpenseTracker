@@ -26,6 +26,7 @@ function createTransaction(description, amount, transactionType, currency) {
   transactions.push(newTransaction);
   viewTransactions();
   saveToLocalStorage(transactions);
+  displayTotalBalance();
 }
 
 function deleteTransaction(index) {
@@ -146,6 +147,34 @@ function convertCurrency(fromCurrency, toCurrency, amount) {
       console.log(data);
     });
 }
+
+function displayTotalBalance() {
+  let totalBalanceUSD = 0;
+
+  transactions.forEach(transaction => {
+    if (transaction.currency !== "USD") {
+      let amountUSD=convertCurrency(transaction.currency, "USD", transaction.amount)  
+      if (transaction.transactionType === "income") {
+        totalBalanceUSD += amountUSD;
+      }
+      else if (transaction.transactionType === "expense") {
+        totalBalanceUSD -= amountUSD;
+      }
+    }
+    else {
+      if (transaction.transactionType === "income") {
+        totalBalanceUSD += transaction.amount;
+      } else if (transaction.transactionType === "expense") {
+        totalBalanceUSD -= transaction.amount;
+      }
+    }
+  });
+
+  const totalBalance = document.getElementById("totalBalance");
+  totalBalance.textContent = totalBalanceUSD.toFixed(2);
+}
+
+
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -166,6 +195,8 @@ fetchCurrencies();
 
 convertCurrencyForm.addEventListener("submit",function(event){
   event.preventDefault();
-  // convertCurrency(currencyFrom,currencyTo,amountToConvert.value);
-convertCurrency("USD", "LBP", 100);
+  const fromCurrency = document.getElementById("currencyFrom").value;
+  const toCurrency = document.getElementById("currencyTo").value;
+  const amount = parseFloat(document.getElementById("amountToConvert").value);
+  convertCurrency(fromCurrency, toCurrency, amount);
 })
