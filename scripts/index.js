@@ -99,14 +99,27 @@ function fetchCurrencies() {
     })
     .then((data) => {
       const selectCurrency = document.getElementById("currency");
+      const currencyFrom=document.getElementById("currencyFrom");
+      const currencyTo=document.getElementById("currencyTo");
       selectCurrency.innerHTML = "";
+      currencyFrom.innerHTML="";
+      currencyTo.innerHTML="";
 
       data.forEach((currency) => {
-        const option = document.createElement("option");
-        option.value = currency.code;
-        option.textContent = currency.code;
+        const option1 = document.createElement("option");
+        const option2 = document.createElement("option");
+        const option3 = document.createElement("option");
+        
+        option1.value = currency.code;
+        option1.textContent = currency.code;
+        option2.value = currency.code;
+        option2.textContent = currency.code;
+        option3.value = currency.code;
+        option3.textContent = currency.code;
 
-        selectCurrency.appendChild(option);
+        selectCurrency.appendChild(option1);
+        currencyFrom.appendChild(option2);
+        currencyTo.appendChild(option3);
       });
     });
 }
@@ -132,7 +145,7 @@ function convertCurrency(fromCurrency, toCurrency, amount) {
       console.log(data);
     });
 }
-convertCurrency("USD", "EUR", 100);
+convertCurrency("USD", "LBP", 100);
 
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
