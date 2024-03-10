@@ -1,7 +1,7 @@
 let transactions = [];
 const transactionsContainer = document.getElementById("transactions-container");
 const createTransactionForm = document.getElementById("add-transaction-form");
-const applyFilters=document.getElementById("applyFilter");
+const applyFilters = document.getElementById("applyFilter");
 
 function viewTransactions() {
   transactionsContainer.innerHTML = "";
@@ -20,8 +20,8 @@ function viewTransactions() {
   });
 }
 
-function createTransaction(description, amount,transactionType,currency) {
-  const newTransaction = { description, amount,transactionType,currency };
+function createTransaction(description, amount, transactionType, currency) {
+  const newTransaction = { description, amount, transactionType, currency };
   transactions.push(newTransaction);
   // console.log("test");
   viewTransactions();
@@ -40,36 +40,47 @@ function editTransaction(index) {
   viewTransactions();
 }
 
-function applyFilter(){
-    const filterByType=document.getElementById("filterByType").value;
-    const amountFrom=parseFloat(document.getElementById("amountFrom").value);
-    const amountTo=parseFloat(document.getElementById("amountTo").value);
-    const filterCurrency=document.getElementById("filterCurrency").value;
+function applyFilter() {
+  const filterByType = document.getElementById("filterByType").value;
+  const amountFrom = parseFloat(document.getElementById("amountFrom").value);
+  const amountTo = parseFloat(document.getElementById("amountTo").value);
+  const filterCurrency = document.getElementById("filterCurrency").value;
 
-    const filteredTransactions= transactions.filter(transaction =>{
-        for (let i=0;i<transactions.length;i++){
-        return (transaction.transactionType===filterByType) && (transaction.amount>amountFrom)
-        && (transaction.amount<amountTo) && (transaction.currency===filterCurrency);
-        }
-    })
-    console.log(filterByType);
-    console.log(amountFrom);
-    console.log(amountTo);
-    console.log(filterCurrency);
-    console.log(filteredTransactions);
-    viewTransactions(filteredTransactions);
+  const filteredTransactions = transactions.filter((transaction) => {
+    return (
+      (filterByType === "all" ||
+        transaction.transactionType === filterByType) &&
+      (isNaN(amountFrom) || transaction.amount > amountFrom) &&
+      (isNaN(amountTo) || transaction.amount < amountTo) &&
+      (filterCurrency === "all" || transaction.currency === filterCurrency)
+    );
+  });
+  filteredTransactionsJson = JSON.stringify(filteredTransactions);
+  console.log(filteredTransactionsJson);
+  transactionsContainer.innerHTML = "";
+  filteredTransactions.forEach((filteredTransaction, index) => {
+    transactionItemJson = document.createElement("div");
+    transactionItemJson.innerHTML = `  <div>${filteredTransaction.description}</div>
+      <div>${filteredTransaction.amount}</div>
+      <div>${filteredTransaction.transactionType}</div>
+      <div>${filteredTransaction.currency}</div>
+      <button onclick="editTransaction(${index})">Edit</button>
+      <button onclick="deleteTransaction(${index})">Delete</button>
+    `;
+    transactionsContainer.appendChild(transactionItemJson);
+  });
 }
 
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const description = document.getElementById("description").value;
   const amount = parseFloat(document.getElementById("amount").value);
-  const transactionType=document.getElementById("transactionType").value;
-  const currency=document.getElementById("currency").value;
-  createTransaction(description, amount,transactionType,currency);
+  const transactionType = document.getElementById("transactionType").value;
+  const currency = document.getElementById("currency").value;
+  createTransaction(description, amount, transactionType, currency);
   createTransactionForm.reset();
 });
 
-applyFilters.addEventListener("click",function(){
-    applyFilter();
-})
+applyFilters.addEventListener("click", function () {
+  applyFilter();
+});
