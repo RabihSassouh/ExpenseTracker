@@ -94,3 +94,21 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
+.footer {
+    height: 5vh;
+    width: 100%;
+  }
+  
+  .footer-policy {
+    display: flex;
+    width: 100%;
+    height: 5vh;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 21%;
+  }
+  .footer-policy p {
+    color: white;
+  }
+  
