@@ -2,20 +2,21 @@ let transactions = [];
 const transactionsContainer = document.getElementById("transactions-container");
 const createTransactionForm = document.getElementById("add-transaction-form");
 const applyFilters = document.getElementById("applyFilter");
-const convertCurrencyForm=document.getElementById("convert-form");
+const convertCurrencyForm = document.getElementById("convert-form");
 
 function viewTransactions() {
   transactionsContainer.innerHTML = "";
 
   transactions.forEach((transaction, index) => {
     const transactionItem = document.createElement("div");
-    transactionItem.innerHTML = `
-        <div>${transaction.description}</div>
-        <div>${transaction.amount}</div>
-        <div>${transaction.transactionType}</div>
-        <div>${transaction.currency}</div>
+    transactionItem.innerHTML = `<div class="container4">
+        <div>Description: ${transaction.description}</div>
+        <div>Amount: ${transaction.amount}</div>
+        <div>Transaction type: ${transaction.transactionType}</div>
+        <div>Currency: ${transaction.currency}</div>
         <button onclick="editTransaction(${index})">Edit</button>
         <button onclick="deleteTransaction(${index})">Delete</button>
+        </div>
       `;
     transactionsContainer.appendChild(transactionItem);
   });
@@ -67,12 +68,14 @@ function applyFilter() {
   filteredTransactions.forEach((filteredTransaction, index) => {
     transactionItemJson = document.createElement("div");
 
-    transactionItemJson.innerHTML = `  <div>${filteredTransaction.description}</div>
-      <div>${filteredTransaction.amount}</div>
-      <div>${filteredTransaction.transactionType}</div>
-      <div>${filteredTransaction.currency}</div>
+    transactionItemJson.innerHTML = `  <div class="container4">
+    <div>Description: ${filteredTransaction.description}</div>
+      <div>Amount: ${filteredTransaction.amount}</div>
+      <div>Transaction type: ${filteredTransaction.transactionType}</div>
+      <div>Currency: ${filteredTransaction.currency}</div>
       <button onclick="editTransaction(${index})">Edit</button>
       <button onclick="deleteTransaction(${index})">Delete</button>
+      </div>
     `;
 
     transactionsContainer.appendChild(transactionItemJson);
@@ -101,17 +104,17 @@ function fetchCurrencies() {
     })
     .then((data) => {
       const selectCurrency = document.getElementById("currency");
-      const currencyFrom=document.getElementById("currencyFrom");
-      const currencyTo=document.getElementById("currencyTo");
+      const currencyFrom = document.getElementById("currencyFrom");
+      const currencyTo = document.getElementById("currencyTo");
       selectCurrency.innerHTML = "";
-      currencyFrom.innerHTML="";
-      currencyTo.innerHTML="";
+      currencyFrom.innerHTML = "";
+      currencyTo.innerHTML = "";
 
       data.forEach((currency) => {
         const option1 = document.createElement("option");
         const option2 = document.createElement("option");
         const option3 = document.createElement("option");
-        
+
         option1.value = currency.code;
         option1.textContent = currency.code;
         option2.value = currency.code;
@@ -132,7 +135,7 @@ function convertCurrency(fromCurrency, toCurrency, amount) {
     to: toCurrency,
     amount: amount,
   };
-  
+
   fetch("https://rich-erin-angler-hem.cyclic.app/students/convert", {
     method: "POST",
     headers: {
@@ -151,17 +154,19 @@ function convertCurrency(fromCurrency, toCurrency, amount) {
 function displayTotalBalance() {
   let totalBalanceUSD = 0;
 
-  transactions.forEach(transaction => {
+  transactions.forEach((transaction) => {
     if (transaction.currency !== "USD") {
-      let amountUSD=convertCurrency(transaction.currency, "USD", transaction.amount)  
+      let amountUSD = convertCurrency(
+        transaction.currency,
+        "USD",
+        transaction.amount
+      );
       if (transaction.transactionType === "income") {
         totalBalanceUSD += amountUSD;
-      }
-      else if (transaction.transactionType === "expense") {
+      } else if (transaction.transactionType === "expense") {
         totalBalanceUSD -= amountUSD;
       }
-    }
-    else {
+    } else {
       if (transaction.transactionType === "income") {
         totalBalanceUSD += transaction.amount;
       } else if (transaction.transactionType === "expense") {
@@ -173,7 +178,6 @@ function displayTotalBalance() {
   const totalBalance = document.getElementById("totalBalance");
   totalBalance.textContent = totalBalanceUSD.toFixed(2);
 }
-
 
 createTransactionForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -193,10 +197,10 @@ applyFilters.addEventListener("click", function () {
 
 fetchCurrencies();
 
-convertCurrencyForm.addEventListener("submit",function(event){
+convertCurrencyForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const fromCurrency = document.getElementById("currencyFrom").value;
   const toCurrency = document.getElementById("currencyTo").value;
   const amount = parseFloat(document.getElementById("amountToConvert").value);
   convertCurrency(fromCurrency, toCurrency, amount);
-})
+});

@@ -1,0 +1,14 @@
+.primary-bg {
+  background-color: rgba(0, 0, 0, 0.945);
+}
+
+.secondary-bg {
+  background-color: #c55a7e;
+}
+
+.primary-text {
+  color: white;
+}
+.secondary-text {
+  color: #c55a7e;
+}

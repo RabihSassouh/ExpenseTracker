@@ -1,0 +1,96 @@
+.hero {
+  width: 100%;
+  height: 90vh;
+  justify-content: space-around;
+}
+.hero h2 {
+  font-size: 40px;
+}
+.hero em {
+  font-size: 30px;
+}
+.container1 {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  justify-content: space-around;
+}
+
+.description,
+.amount,
+.transactionType,
+.currency,
+.addTransaction {
+  background-color: rgba(0, 0, 0, 0.945);
+  color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.container2 {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  justify-content: space-around;
+}
+.img1 {
+  width: 100%;
+  height: 80vh;
+}
+.convert-form {
+  flex: 4;
+}
+.converted {
+  flex: 1;
+}
+.convert-from,
+.convert-to,
+.amountToConvert,
+.convert,
+.converted {
+  color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.container3 {
+  height: 20vh;
+}
+.child1,
+.child2,
+.child3 {
+  width: 100%;
+  flex: 1;
+}
+.child2 {
+  align-items: center;
+}
+.child3 button,
+.filterByType,
+.amountFrom,
+.amountTo,
+.filterCurrency {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.transactions-container {
+  background-color: #c55a7e;
+}
+.container4 {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.container4 button {
+  background-color: rgba(0, 0, 0, 0.945);
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}

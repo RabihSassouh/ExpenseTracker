@@ -1,64 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/commons/colors.css">
+    <link rel="stylesheet" href="./styles/commons/utilities.css">
+    <link rel="stylesheet" href="./styles/index.css">
     <title>ExpenseTracker</title>
 </head>
 
 <body>
-    <header>
+    <header class="flex column center primary-bg primary-text">
         <h1>Expense Tracker</h1>
         <h3>Total Balance in USD: $<span id="totalBalance">0.00</span></h3>
     </header>
+    <section class="hero flex column align primary-bg ">
+        <h2 class="primary-bg secondary-text">Stop chasing paper receipts</h2>
+        <em class="primary-text ">Expense Tracker keeps everything organized so you can say goodbye to that envelope of
+            receipts!</em>
 
-    <form id="add-transaction-form">
-        <input type="text" id="description" placeholder="Description" required>
-        <input type="number" id="amount" placeholder="Amount" required>
-        <select id="transactionType">
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-        </select>
-        <select name="currency" id="currency">
-        </select>
-        <button type="submit">Add Transaction</button>
-    </form>
-    <form id="convert-form">
-        <div>Convert from:
-            <select name="currencyFrom" id="currencyFrom">
+    </section>
+    <div class="secondary-bg container1">
+        <h3 class="flex center">Add your latest transaction...</h3>
+        <form id="add-transaction-form" class="flex secondary-bg container1">
+            <input type="text" id="description" class="description" placeholder="Description" required>
+            <input type="number" id="amount" class="amount" placeholder="Amount" required>
+            <select id="transactionType" class="transactionType">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
             </select>
-        </div>
-        <div>Convert to:
-            <select name="currencyTo" id="currencyTo">
+            <select name="currency" id="currency" class="currency">
             </select>
-        </div>
-        <input type="number" id="amountToConvert" placeholder="Amount">
-        <button type="submit">Convert</button>
-    </form>
-    <div id="converted"></div>
-    <div id="filters">
-        <div>Filters</div>
-        <select id="filterByType">
-            <option value="all">All</option>
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-        </select>
-        <div>Amount from:</div>
-        <input type="number" id="amountFrom" placeholder="0">
-        <div>Amount to:</div>
-        <input type="number" id="amountTo" placeholder="999999999">
-        <div>Filter by currency</div>
-        <select id="filterCurrency">
-            <option value="all">All</option>
-            <option value="LBP">LBP</option>
-            <option value="USD">USD</option>
-        </select>
-        <button id="applyFilter">Apply Filter</button>
+            <button type="submit" class="addTransaction">Add Transaction</button>
+        </form>
     </div>
-<!-- Container to view transactions -->
-    <div id="transactions-container"></div>
+    <div>
+        <img src="./assets/imgs/ExpenseTrackerImg1.jpg" class="img1">
+    </div>
+    <div class="flex column container2 primary-bg primary-text">
+        <div class="flex center">Your Currency Converter</div>
+        <div class="flex container2">
+            <form id="convert-form" class="convert-form flex spaceAround">
+                <div class="convert-from">Convert from:
+                    <select name="currencyFrom" id="currencyFrom" class="primary-bg primary-text">
+                    </select>
+                </div>
+                <div class="convert-to">Convert to:
+                    <select name="currencyTo" id="currencyTo" class="primary-bg primary-text">
+                    </select>
+                </div>
+                <input type="number" id="amountToConvert" placeholder="Amount"
+                    class="amountToConvert primary-bg primary-text">
+                <button type="submit" class="convert primary-bg primary-text">Convert</button>
+            </form>
+            <div id="converted" class="converted primary-bg primary-text"></div>
+        </div>
+    </div>
+    <div class="container3 flex column center">
+        <div class="flex center child1">Filter All Your Transactions Here!</div>
+        <div id="filters" class="flex spaceAround child2">
+            <select id="filterByType" class="filterByType">
+                <option value="all">All</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            <div class="amountfromText">Amount from:</div>
+            <input type="number" id="amountFrom" class="amountFrom" placeholder="0">
+            <div class="amountToText">Amount to:</div>
+            <input type="number" id="amountTo" class="amountTo" placeholder="999999999">
+            <div class="filterCurrencyText">Filter by currency</div>
+            <select id="filterCurrency" class="filterCurrency">
+                <option value="all">All</option>
+                <option value="LBP">LBP</option>
+                <option value="USD">USD</option>
+            </select>
+        </div>
+        <div class="flex center child3 ">
+            <button id="applyFilter" class="flex center  primary-bg primary-text">Apply Filter</button>
+        </div>
+    </div>
+    <!-- Container to view transactions -->
+    <div id="transactions-container" class="transactions-container flex column start"></div>
 
-    <footer></footer>
-    <script src="./scripts/index.js"></script>    
+    <footer>
+
+    </footer>
+    <script src="./scripts/index.js"></script>
 </body>
+
 </html>
